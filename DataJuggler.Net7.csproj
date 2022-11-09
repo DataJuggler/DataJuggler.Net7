@@ -1,0 +1,120 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFramework>net7.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Data Juggler</Authors>
+    <Company>Data Juggler</Company>
+    <Description>This class is for .NET7 and is a port of DataJuggler.Net for the .Net Framework, which is used by 
+DataTier.Net and DB Compare to read SQL Server database schema and code generate stored procedure
+driven data tiers.
+
+Breaking Change: Now that this project uses Microsoft.Data.SqlClient 5.0, connection strings must
+set Encrypt = False if your database is not encrypted. 
+
+The two main classes are:
+SQLDatabaseConnector - A wrapper for SqlDatabaseConnection that reads database schema.
+
+CSharpClassWriter - A class that is useful in code generating C# classes.</Description>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/DataJuggler/DataJuggler.Net6</PackageProjectUrl>
+    <Version>7.0.1</Version>
+    <Copyright>Data Juggler - Corby Nichols</Copyright>
+    <RepositoryType>Git Hub</RepositoryType>
+    <RepositoryUrl>https://github.com/DataJuggler/DataJuggler.Net6.git</RepositoryUrl>
+    <PackageTags>C#, SQL Server, DataTier.Net, DataJuggler.Net</PackageTags>
+    <PackageReleaseNotes>11.8.2022
+v7.0.1: This project has been updated for .NET 7.0. Use DataJuggler.Net6 for for .NET6.
+
+10.19.2022 (Take Two):
+v7.0.1-rc1: I added an optional parameter to the BuildConnectionString methods, so that the 
+connectionstrings will ad Encrypt=False unless the user passes in true for Encrypt.
+
+10.19.2022:
+v7.0.0-rc1 - The biggest breaking change so far is I updated Microsoft.Data.SqlClient to version 5.1.x (preview for now)
+that I skipped on version 6 of this library. Last time there were too many breaking changes for me to handle a change
+to connection strings. I am attempting to fix that this year.
+
+8.5.2022 v6.2.0: I now compare and script DefaultValueCheckConstraints and Foreign Key check 
+constraints. After working on one of my databases I realized constraints that have No Check
+are not working. Still the Generate Scripts is saving me time as it improves.
+
+6.17.2022 v6.1.4: I updated DataJuggler.Cryptography package.
+
+6.8.2022: I updated DataJuggler.Cryptography package.
+
+
+4.18.2022: After only 18 years, I discovered that I the data type Date in SQL Server was not mapped.
+I always use DateTime, but I have a project with just Date data type and realized this isn't parsed.
+One of the advantages of being unpopular is no one sees my mistakes.
+		
+4.14.2022: I added two properties to DataTable and StoredProcedure classes, to keep track of
+UsesAnsiNulls and UseQuotedIdentifiers. I now set these objects when I load the DatabaseSchema.
+It turns out, the text for the Defition of the View or Stored Procedure already had this, so not
+really needed. Generate Scripts now creates missing fields, tables, views and stored procedures.
+Next is constraints and keys and that is 99% of all updates I do.
+		
+4.13.2022: I added a new method to SQL Database Connector to get the text for a view. This was needed for 
+DB Compare had a bug when it tried to generate sql for a view. Tables are easy, views I had to get the actual text
+to make sure all the joins are correct.
+		
+12.31.2021
+Version 6.0.1: I upgraded the reference to Microsoft.Data.SqlClient to 4.0.0. Turns out this breaks everything without encrypt =false,
+so I took this out.
+		
+3.0.6: I added a new property called CreatedFilePaths. This list of strings will contain the full path of all
+files created during WriteClasses method.
+
+Also, I found out why I had problems with Nuget version 3.0.2 - 3.0.5. I had a project reference and a Nuget reference, and Nuget and / or Visual Studio didn't like it.
+
+Version 3.0.5: I updated the Read Me about a new project that uses CSharpClassWriter.
+
+Version 3.0.4: Not sure why, but Nuget was giving me warning on 3.0.3 version. Trying again.
+
+Version 3.0.3: I made a few changes to CSharpClassWriter to make it easier to code generate from outside DataTier.Net. My project DataJuggler.Excelerate now has a code generator, so the header row in an Excel sheet
+can be used to create a class.
+
+Version 3.0.1: I created a default constructor for CSharpClassWriter, so it is not only for DataTier.Net
+
+Update 9.15.2021
+Version 3.0.2: I added DataType object for code generation outside of DataTier.Net.
+
+Version 3.0.0: I changed out System.Data.SqlClient to Microsoft.Data.SqlClient, so I updated this package to
+version 3.0.0 to be the same version as Microsoft.Data.SqlClient.
+
+Version 2.5.1: I added 2 new methods to SQLDatabaseConnector for FindTable and FindTableIndex. It surprises me this doesn't exist somewhere in the app.
+
+Version 2.5.0: This version converted the .Net Core version to .Net 5. All the different names confuse even me, so I am trying to get down to everything I keep working on is .Net 5. 
+
+      I added new properties named Tag to DataField, DataRow and DataTable classes. I use these fields in a new
+      project I am working on called DataDiff, which will be used to find changes before and after something happens.
+
+      I updated the reference to System.Data.SqlClient to 4.8.0
+      I updated the reference to DataJuggler.UltimateHelper.Core to version 1.1.4</PackageReleaseNotes>
+    <Nullable>disable</Nullable>   
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="CryptographyManager.cs" />
+  </ItemGroup>
+
+  <ItemGroup>    
+    <PackageReference Include="DataJuggler.Cryptography" Version="7.0.0" />    
+    <PackageReference Include="DataJuggler.UltimateHelper" Version="7.0.0" />    
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>   
+    <None Include="LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
+
+
+
+
+
+
