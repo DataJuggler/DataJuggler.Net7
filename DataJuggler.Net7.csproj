@@ -18,12 +18,15 @@ SQLDatabaseConnector - A wrapper for SqlDatabaseConnection that reads database s
 CSharpClassWriter - A class that is useful in code generating C# classes.</Description>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/DataJuggler/DataJuggler.Net6</PackageProjectUrl>
-    <Version>7.0.1</Version>
+    <Version>7.0.2</Version>
     <Copyright>Data Juggler - Corby Nichols</Copyright>
     <RepositoryType>Git Hub</RepositoryType>
     <RepositoryUrl>https://github.com/DataJuggler/DataJuggler.Net6.git</RepositoryUrl>
     <PackageTags>C#, SQL Server, DataTier.Net, DataJuggler.Net</PackageTags>
-    <PackageReleaseNotes>11.8.2022
+    <PackageReleaseNotes>11.15.2022: I added TargetFrameworkEnum to this library. This enum is used by DataTier.Net
+and DataJuggler.Excelerate to determine the references to include.
+
+11.8.2022
 v7.0.1: This project has been updated for .NET 7.0. Use DataJuggler.Net6 for for .NET6.
 
 10.19.2022 (Take Two):
