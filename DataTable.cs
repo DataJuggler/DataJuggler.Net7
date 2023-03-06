@@ -195,7 +195,7 @@ namespace DataJuggler.Net7
             #region ContainsBinaryData
             /// <summary>
             /// Does this table contain Binary
-            /// data.
+            /// Data.
             /// </summary>
             public bool ContainsBinaryData
             {
@@ -210,7 +210,7 @@ namespace DataJuggler.Net7
                         // This is a binary field
                         if(field.DataType == DataManager.DataTypeEnum.Binary)
                         {
-                            // this table does contain binary data
+                            // this table does contain binary Data
                             containsBinaryData = true;
                             
                             // break out of loop 

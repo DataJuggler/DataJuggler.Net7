@@ -67,7 +67,7 @@ namespace DataJuggler.Net7
 			/// <param name="fileManager">The fileManager is used to keep track of which 
 			/// files were added during a build.
 			/// </param>
-			/// <param name="businessObjectPassArg">If true the business class is created, else the data class.
+			/// <param name="businessObjectPassArg">If true the business class is created, else the Data class.
 			/// This is for the .business.cs
 			/// </param>
 			/// <param name="textWriterMode">Set this to true to create a StringBuilder instead of a StreamWriter.</param>
@@ -311,18 +311,18 @@ namespace DataJuggler.Net7
                     // is this field an enumeration field
                     if(field.IsEnumeration)
                     {
-                        // set data type
+                        // set Data type
                         dataType = field.EnumDataTypeName;
                     }
                     else
                     {
-				        // determine data type
+				        // determine Data type
                         switch (field.DataType)
 				        {
 
                             case DataManager.DataTypeEnum.Binary:
 
-                                // set data type to int
+                                // set Data type to int
                                 dataType = "byte[]";
 
                                 // required
@@ -331,7 +331,7 @@ namespace DataJuggler.Net7
 					        case DataManager.DataTypeEnum.Integer:
 					        case DataManager.DataTypeEnum.Autonumber:
 					        
-						        // set data type to int
+						        // set Data type to int
 						        dataType = "int";
         						
 						        // required
@@ -358,7 +358,7 @@ namespace DataJuggler.Net7
                                 
 					        case DataManager.DataTypeEnum.String:
 						        
-						        // set data type to string
+						        // set Data type to string
 						        dataType =  "string";
 
                                 // required
@@ -366,7 +366,7 @@ namespace DataJuggler.Net7
                                 
 					        case DataManager.DataTypeEnum.DataTable:
 					        
-					            // set data type to DataTable
+					            // set Data type to DataTable
 						        dataType =  "DataJuggler.Net7.DataTable";
 
                                 // required
@@ -787,8 +787,8 @@ namespace DataJuggler.Net7
 					}
 					else
 					{
-						// append .data.cs
-						sb.Append(".data.cs");
+						// append .Data.cs
+						sb.Append(".Data.cs");
 					}
 				}
 
@@ -1955,7 +1955,7 @@ namespace DataJuggler.Net7
 						// Create New String
 						sb = new StringBuilder("private ");
 
-                        // parse data type
+                        // parse Data type
                         dataType = ConvertDataType(field);
                         		
 						// Append dataType
@@ -3121,7 +3121,7 @@ namespace DataJuggler.Net7
 				// Begin Region Private Variables
 				BeginRegion("Private Variables");
 
-				// if this is the data object pass
+				// if this is the Data object pass
 				if(!businessObjectPass)
 				{
 				    // Write DataClassVariables
@@ -3146,7 +3146,7 @@ namespace DataJuggler.Net7
 				// Begin Region For Properties
 				BeginRegion("Properties");
 
-                // if this is the data object pass
+                // if this is the Data object pass
 				if(!BusinessObjectPass)
 				{
 				    // Write Each Property
@@ -3879,7 +3879,7 @@ namespace DataJuggler.Net7
 
 			#region DoNotPrependExtension
             /// <summary>
-            /// Is this the true, .business.cs and / or .data.cs will not be written.
+            /// Is this the true, .business.cs and / or .Data.cs will not be written.
             /// </summary>
             public bool DoNotPrependExtension
             {
@@ -3890,7 +3890,7 @@ namespace DataJuggler.Net7
 
 			#region DoNotUsePartialClass
             /// <summary>
-            /// Is this the true, .business.cs and / or .data.cs will not be written.
+            /// Is this the true, .business.cs and / or .Data.cs will not be written.
             /// </summary>
             public bool DoNotUsePartialClass
             {

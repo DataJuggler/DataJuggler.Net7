@@ -407,7 +407,7 @@ namespace DataJuggler.Net7
                          // Open The command Object
                         SqlCommand command = new SqlCommand(sql, DatabaseConnection);
 
-                        // Create a data adapter
+                        // Create a Data adapter
                         SqlDataAdapter adapter = new SqlDataAdapter(command);
 
                         // Create And Open Data
@@ -820,7 +820,7 @@ namespace DataJuggler.Net7
                     // Open The command Object
                     SqlCommand command = new SqlCommand(sql, connection);
 
-                    // Create a data adapter
+                    // Create a Data adapter
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
 
                     // Create And Open Data
@@ -1254,7 +1254,7 @@ namespace DataJuggler.Net7
                     // Open The command Object
                     SqlCommand command = new SqlCommand(sourceSQL, DatabaseConnection);
 
-                    // Create a data adapter
+                    // Create a Data adapter
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
 
                     // Create And Open Data
@@ -1306,7 +1306,7 @@ namespace DataJuggler.Net7
                         // get the first dataTable
                         System.Data.DataTable dataTable = dataSet.Tables[0];
 
-                        // if the dataTable has data
+                        // if the dataTable has Data
                         if (dataTable.Rows.Count > 0)
                         {
                             // iterate each row in the dataTable
@@ -1318,7 +1318,7 @@ namespace DataJuggler.Net7
                                 // set the name
                                 parameter.ParameterName = row["Name"].ToString();
 
-                                // set the data type
+                                // set the Data type
                                 string dataTypeString = row["type"].ToString();
                                 parameter.DataType = ParseDataType(dataTypeString, false);
 
@@ -1349,7 +1349,7 @@ namespace DataJuggler.Net7
             /// <summary>
             /// This method returns the tables that a store procedure is dependant on.
             /// This is used to help identity the primary key and other information 
-            /// about the data fields.
+            /// about the Data fields.
             /// </summary>
             /// <param name="allTables"></param>
             /// <param name="procedure"></param>
@@ -1431,7 +1431,7 @@ namespace DataJuggler.Net7
                     // Open The command Object
                     SqlCommand command = new SqlCommand(sourceSQL, DatabaseConnection);
 
-                    // Create a data adapter
+                    // Create a Data adapter
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
 
                     // Create And Open Data
@@ -1548,7 +1548,7 @@ namespace DataJuggler.Net7
                         // Open The command Object
                         SqlCommand command = new SqlCommand(sql, DatabaseConnection);
 
-                        // Create a data adapter
+                        // Create a Data adapter
                         SqlDataAdapter adapter = new SqlDataAdapter(command);
 
                         // Create And Open Data
@@ -1738,7 +1738,7 @@ namespace DataJuggler.Net7
                         // Open The command Object
                         SqlCommand command = new SqlCommand(sql, DatabaseConnection);
 
-                          // Create a data adapter
+                          // Create a Data adapter
                         SqlDataAdapter adapter = new SqlDataAdapter(command);
 
                         // Create And Open Data
@@ -1971,7 +1971,7 @@ namespace DataJuggler.Net7
                         // Open The command Object
                         SqlCommand command = new SqlCommand(sql, DatabaseConnection);
 
-                        // Create a data adapter
+                        // Create a Data adapter
                         SqlDataAdapter adapter = new SqlDataAdapter(command);
 
                         // Create And Open Data
@@ -2087,7 +2087,7 @@ namespace DataJuggler.Net7
                     // Set the connection
                     this.Command.Connection = databaseconnection;
                     
-					// If this table contains binary data
+					// If this table contains binary Data
 					if(dataTable.ContainsBinaryData)
 					{
 					    // Load DataRows with Binary Data
@@ -2095,7 +2095,7 @@ namespace DataJuggler.Net7
 			        }
 			        else
 			        {
-			            // Load the Rows without binary data
+			            // Load the Rows without binary Data
 			            dataTable.Rows = LoadDataRowsWithoutBinaryData(dataTable);
                     }
                     			
@@ -2106,7 +2106,7 @@ namespace DataJuggler.Net7
 
                 #region LoadDataRowsWithBinaryData(DataTable dataTable, string sql)
                 /// <summary>
-                /// This method loads the data rows that contain binary data.
+                /// This method loads the Data rows that contain binary Data.
                 /// A SqlDataReader is used so that SequentialAccess can be set.
                 /// </summary>
                 /// <param name="dataTable"></param>
@@ -2193,7 +2193,7 @@ namespace DataJuggler.Net7
                                             fieldValue = reader[fieldOrdinal];   
                                         }
                                         
-                                        // If this is a string and there is data trim it up
+                                        // If this is a string and there is Data trim it up
                                         if ((dataTable.Fields[fieldIndex].DataType == DataManager.DataTypeEnum.String) && (fieldValue != null))
                                         {
                                             // Trim as a string
@@ -2231,7 +2231,7 @@ namespace DataJuggler.Net7
 
                 #region LoadDataRowsWithoutBinaryData(DataTable dataTable, string sql = "")
                 /// <summary>
-                /// This method loads the DataRows without Binary data.
+                /// This method loads the DataRows without Binary Data.
                 /// </summary>
                 /// <param name="dataTable"></param>
                 /// <returns></returns>
@@ -2648,7 +2648,7 @@ namespace DataJuggler.Net7
                         // Open The command Object
                         SqlCommand command = new SqlCommand(sql, DatabaseConnection);
 
-                        // Create a data adapter
+                        // Create a Data adapter
                         SqlDataAdapter adapter = new SqlDataAdapter(command);
 
                         // Create And Open Data
@@ -2860,7 +2860,7 @@ namespace DataJuggler.Net7
                         // if the procedure name contains dss
                         if (IgnoreDataSync)
                         {
-                            // if this procedure contains a data sync type name
+                            // if this procedure contains a Data sync type name
                             if (sp.ProcedureName.Contains("_dss"))
                             {
                                 // we need to skip this procedure

@@ -684,7 +684,7 @@ namespace DataJuggler.Net7
             #region Precision
             /// <summary>
             /// The total number of digits in this number.
-            /// This is only used for Decimal data types
+            /// This is only used for Decimal Data types
             /// </summary>
             public int Precision
             {
@@ -724,7 +724,7 @@ namespace DataJuggler.Net7
             #region Scale
             /// <summary>
             /// This is the number of places after the decimal point.
-            /// This value is only used for Decimal data type objects
+            /// This value is only used for Decimal Data type objects
             /// </summary>
             public int Scale
             {
