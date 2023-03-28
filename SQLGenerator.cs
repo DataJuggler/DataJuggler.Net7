@@ -410,8 +410,7 @@ namespace DataJuggler.Net7
                 sb.Append("]");
 					
 				// return SelectSQL
-                return sb.ToString();
-				
+                return sb.ToString();				
 			}
 			#endregion
 

@@ -2237,12 +2237,15 @@ namespace DataJuggler.Net7
                 /// <returns></returns>
                 public List<DataRow> LoadDataRowsWithoutBinaryData(DataTable dataTable, string sql = "")
                 {
+                    // local
+                    int index = -1;
+
                     // Create DataSet
                     DataSet dataSet = new DataSet();
 
                     // Create dataRow
                     DataRow dataRow = new DataRow(dataTable);
-                
+
                     // Create the adapter to read the fields
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(this.Command);
 
@@ -2264,6 +2267,9 @@ namespace DataJuggler.Net7
                     // Loop through each row in the dataSet
                     foreach (System.Data.DataRow tempDataRow in dataSet.Tables[dataTable.Name].Rows)
                     {
+                        // reset
+                        index = -1;
+
                         // Create A New row
                         dataRow = new DataJuggler.Net7.DataRow(dataTable);
 
@@ -2271,8 +2277,11 @@ namespace DataJuggler.Net7
                         dataRow.Fields = CloneFields(dataTable.ActiveFields);
 
                         // Add Each field
-                        foreach (DataJuggler.Net7.DataField field in dataTable.ActiveFields)
+                        foreach (DataJuggler.Net7.DataField field in dataTable.Fields)
                         {
+                            // Increment the value for index
+                            index++;
+
                             // Finding field Index
                             int fieldOrdinal = FindFieldOrdinalInDataRow(dataSet, dataTable.Name, field.FieldName, field.Caption);
 
@@ -2280,7 +2289,7 @@ namespace DataJuggler.Net7
                             if (fieldOrdinal >= 0)
                             {
                                 // Set This field 
-                                dataRow.Fields[field.Index].FieldValue = tempDataRow[fieldOrdinal];
+                                dataRow.Fields[index].FieldValue = tempDataRow[fieldOrdinal];
                             }
                         }
 
@@ -2308,7 +2317,6 @@ namespace DataJuggler.Net7
 						
 				// Return tables
 				return tables;
-
 			}
 			#endregion
 
