@@ -1592,15 +1592,15 @@ namespace DataJuggler.Net7
             }
             #endregion
 			
-			#region LoadDatabaseData(Database database)
+			#region LoadDatabaseData(Database database, List<string> ignoreTables = null)
 			/// <summary>
-			/// Connects To And Loads The Data For A SQL Database
+			/// Connects To And Loads The Data For A SQL Server Database.
+            /// Make sure the Database has a connectionstring property set when this method is called.
 			/// </summary>
-			public Database LoadDatabaseData(Database database)
+			public Database LoadDatabaseData(Database database, List<string> ignoreTables = null)
 			{
 				try
 				{
-
 					// Create New Connection Object
 					DatabaseConnection = new SqlConnection(database.ConnectionString);
 		
@@ -1608,8 +1608,7 @@ namespace DataJuggler.Net7
 					DatabaseConnection.Open();
 
 					// LoadDataTablesData
-					database.Tables = LoadDataTablesData(database.Tables);
-
+					database.Tables = LoadDataTablesData(database.Tables, ignoreTables);
 				}
 				catch(System.Exception e)
 				{
@@ -2304,15 +2303,42 @@ namespace DataJuggler.Net7
 
             #endregion
 
-            #region LoadDataTablesData()
-            public List<DataTable> LoadDataTablesData(List<DataTable> tables)
+            #region LoadDataTablesData(List<DataTable> tables, List<string> ignoreTables = null)
+            public List<DataTable> LoadDataTablesData(List<DataTable> tables, List<string> ignoreTables = null)
 			{
-	
+                // local
+                bool skipTable = false;
+
 				// Iterate Through tables Collection
 				for(int x = 0;x < tables.Count;x++)
 				{
-					// Load Rows For This table
-					tables[x].Rows = LoadDataRows(tables[x]);
+                    // reset
+                    skipTable = false;
+
+                    // If the ignoreTables collection exists and has one or more items
+                    if (ListHelper.HasOneOrMoreItems(ignoreTables))
+                    {
+                        // Iterate the collection of string objects
+                        foreach (string tableName in ignoreTables)
+                        {
+                            // if this table is found
+                            if (TextHelper.IsEqual(tableName, tables[x].Name))
+                            {
+                                // abort
+                                skipTable = true;
+
+                                // break out of the loop
+                                break;
+                            }
+                        }
+                    }
+
+                    // if the value for skipTable is false
+                    if (!skipTable)
+                    {
+					    // Load Rows For This table
+					    tables[x].Rows = LoadDataRows(tables[x]);
+                    }
 				}
 						
 				// Return tables

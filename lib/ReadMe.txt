@@ -1,47 +1,67 @@
-Update for Dot Net Core: Environment Variables are now used to hold the connection string.
+4.1.2023: DataJuggler.Net7 is a port of earlier versions of this project. All new development
+is performed on this version until .NET8 is released later this year.
+DataJuggler.Net7 is used to read SQL Server database schema using SQLDatabaseConnector.cs, and also 
+has code generation features using CSharpClassWriter.cs.
 
-This required DataJuggler.UltimateHelper.Core.
-
-Update for version 5.3.0:
-
-Oops! I accidently published and older version yesterday. This is the correct version. Anyone with a 
-5.2.2 installation is urged to update to 5.3.0. I frequently work on my own projects late at night 
-and sometimes after a couple of beers. Sorry if this caused anyone any problems.
-
-Update for version 5.2.2:
-
-This version better handles tables that do not have an identity incremented integer primary key. 
-
-Update for version 5.1.6: 
-The class Function was left out; it is part of DB Compare and used to compare SQL Server Functions.
-
-This file is part of RAD Studio Code Generation Toolkit
-https://radstudio.codeplex.com/
-This project was formerly known as DataClassBuilder.Net which was the Predecessor to RAD Studio Code Generation Toolkit.
-SQLDatabase Connector
-This is a wrapper to the SQL Connection and also contains many methods used to read the database schema.
-Example Open Source Projects That Use The SQL Database Connector:
-RAD Studio Code Generation Toolkit
-https://radstudio.codeplex.com/
-The SQL Database Connector is used to read the database schema so it can create C# class objects based upon
-each table and view and to create the Stored Procedures that implement all the CRUD methods.
+DataJuggler.Net 7 powers the following projects
 
 DB Compare
-https://dbcompare.codeplex.com/
-DB Compare reads the database schema and compares two SQL Server databases.
-CSharpClassWriter
-This class is useful in building applications that code generate C# source code or DTE packages that extend Visual Studio. It contains many helper methods that make code generation with C# much simpler than the default
-Microsoft DTE objects. 
+https://github.com/DataJuggler/DBCompare
 
-Example Open Source Projects for the CSharpClassWriter:
-RAD Studio Code Generation Toolkit
-https://radstudio.codeplex.com/
-RAD Studio Code Generation Toolkit uses this class to code generate the C# object classes and the CRUD methods in the data tier.
-Also the project StoredProcedureGenerator uses this class to create the C# class objects that represents Stored Procedures.
-Regionizer
-https://regionizer.codeplex.com/
-This class is used to format C# Documents into regions for Methods, Private Variables, Properties, Constructors and Events.
-Regionizer also includes a C# Auto Commenting System that uses regular expressions and can be extended so you can create your own auto comments.
+DB Compare reads the database schema and compares two SQL Server databases and displays a report
+of any schema differences. The generate scripts feature is a work in progress.
+
+Another project that uses this and is open source is:
+
+DataJuggler.Excelerate
+https://github.com/DataJuggler/Excelerate
+
+Nuget DataJuggler.Excelerate
+
+Live Demo
+https://excelerate.datajuggler.com
+
+Code Generate C# Classes From Excel Header Rows
+
+Blazor Source Code For Above Site
+
+Blazor Excelerate
+
+https://github.com/DataJuggler/Blazor.Excelerate
+
+And my latest project is SQL Snapshot
+
+Nuget DataJuggler.SQLSnapshot
+https://github.com/DataJuggler/SQLSnapshot
+
+Export an entire SQL Server database to Excel including all rows with 3 lines of code.
+
+-
+
+Another site that is powered by an earlier version of DataJuggler.Net7 is, and is my favorite project.
+
+DataTier.Net
+https://github.com/DataJuggler/DataTier.Net
+
+DataTier.Net is an Entity Framework alternative that uses all stored procedures.
+
+If you feel any of the projects are worth the price of free, please leave a star on Git Hub and / or
+subscribe to my YouTube channel.
+
+https://youtube.com/DataJuggler
+
+Thanks,
+
+Corby / Data Juggler
+
+
+
+
+
+
+
+
+
 
 
 
