@@ -5,6 +5,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Data Juggler</Authors>
     <Company>Data Juggler</Company>
+	<PackageReadmeFile>Readme.md</PackageReadmeFile>
     <Description>This class is for .NET7 and is a port of DataJuggler.Net for the .Net Framework, which is used by 
 DataTier.Net and DB Compare to read SQL Server database schema and code generate stored procedure
 driven data tiers.
@@ -18,7 +19,7 @@ SQLDatabaseConnector - A wrapper for SqlDatabaseConnection that reads database s
 CSharpClassWriter - A class that is useful in code generating C# classes.</Description>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/DataJuggler/DataJuggler.Net6</PackageProjectUrl>
-    <Version>7.0.5</Version>
+    <Version>7.0.6</Version>
     <Copyright>Data Juggler - Corby Nichols</Copyright>
     <RepositoryType>Git Hub</RepositoryType>
     <RepositoryUrl>https://github.com/DataJuggler/DataJuggler.Net6.git</RepositoryUrl>
@@ -97,7 +98,8 @@ Version 2.5.0: This version converted the .Net Core version to .Net 5. All the d
 
       I updated the reference to System.Data.SqlClient to 4.8.0
       I updated the reference to DataJuggler.UltimateHelper.Core to version 1.1.4</PackageReleaseNotes>
-    <Nullable>disable</Nullable>   
+    <Nullable>disable</Nullable>
+    <PackageReadmeFile>README.md</PackageReadmeFile>   
   </PropertyGroup>
 
   <ItemGroup>
@@ -114,6 +116,13 @@ Version 2.5.0: This version converted the .Net Core version to .Net 5. All the d
     <None Include="LICENSE.txt">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>    
+    <None Update="ReadMe.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 
