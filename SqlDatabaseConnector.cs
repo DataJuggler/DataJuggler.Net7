@@ -2237,64 +2237,84 @@ namespace DataJuggler.Net7
                 /// <returns></returns>
                 public List<DataRow> LoadDataRowsWithoutBinaryData(DataTable dataTable, string sql = "")
                 {
-                    // local
+                    // locals
                     int index = -1;
+                    bool sqlUsed = false;
 
-                    // Create DataSet
-                    DataSet dataSet = new DataSet();
-
-                    // Create dataRow
-                    DataRow dataRow = new DataRow(dataTable);
-
-                    // Create the adapter to read the fields
-                    SqlDataAdapter dataAdapter = new SqlDataAdapter(this.Command);
-
-                    // if custom sql was passed in
-                    if (TextHelper.Exists(sql))
+                    try
                     {
+                        // Create DataSet
+                        DataSet dataSet = new DataSet();
+
+                        // Create dataRow
+                        DataRow dataRow = new DataRow(dataTable);
+
                         // Create the adapter to read the fields
-                        dataAdapter = new SqlDataAdapter(sql, this.DatabaseConnection);
+                        SqlDataAdapter dataAdapter = new SqlDataAdapter(this.Command);
 
-                        // Fill DataAdapter
-                        dataAdapter.Fill(dataSet, sql);
-                    }
-                    else
-                    {
-                        // Fill DataAdapter
-                        dataAdapter.Fill(dataSet, dataTable.Name);
-                    }
-                    
-                    // Loop through each row in the dataSet
-                    foreach (System.Data.DataRow tempDataRow in dataSet.Tables[dataTable.Name].Rows)
-                    {
-                        // reset
-                        index = -1;
-
-                        // Create A New row
-                        dataRow = new DataJuggler.Net7.DataRow(dataTable);
-
-                        // Clone Fields Collection For This row
-                        dataRow.Fields = CloneFields(dataTable.ActiveFields);
-
-                        // Add Each field
-                        foreach (DataJuggler.Net7.DataField field in dataTable.Fields)
+                        // if custom sql was passed in
+                        if (TextHelper.Exists(sql))
                         {
-                            // Increment the value for index
-                            index++;
+                            // the sql was used
+                            sqlUsed = true;
 
-                            // Finding field Index
-                            int fieldOrdinal = FindFieldOrdinalInDataRow(dataSet, dataTable.Name, field.FieldName, field.Caption);
+                            // Create the adapter to read the fields
+                            dataAdapter = new SqlDataAdapter(sql, this.DatabaseConnection);
 
-                            // Verify fieldOrdinal Was Found
-                            if (fieldOrdinal >= 0)
-                            {
-                                // Set This field 
-                                dataRow.Fields[index].FieldValue = tempDataRow[fieldOrdinal];
-                            }
+                            // Fill DataAdapter
+                            dataAdapter.Fill(dataSet, sql);
                         }
+                        else
+                        {
+                            // explicit
+                            sqlUsed = false;
 
-                        // Add This row
-                        dataTable.Rows.Add(dataRow);
+                            // Fill DataAdapter
+                            dataAdapter.Fill(dataSet, dataTable.Name);
+                        }
+                    
+                        // Loop through each row in the dataSet
+                        foreach (System.Data.DataRow tempDataRow in dataSet.Tables[dataTable.Name].Rows)
+                        {
+                            // reset
+                            index = -1;
+
+                            // Create A New row
+                            dataRow = new DataJuggler.Net7.DataRow(dataTable);
+
+                            // Clone Fields Collection For This row
+                            dataRow.Fields = CloneFields(dataTable.ActiveFields);
+
+                            // Add Each field
+                            foreach (DataJuggler.Net7.DataField field in dataTable.Fields)
+                            {
+                                // Increment the value for index
+                                index++;
+
+                                // Finding field Index
+                                int fieldOrdinal = FindFieldOrdinalInDataRow(dataSet, dataTable.Name, field.FieldName, field.Caption);
+
+                                // Verify fieldOrdinal Was Found
+                                if (fieldOrdinal >= 0)
+                                {
+                                    // Set This field 
+                                    dataRow.Fields[index].FieldValue = tempDataRow[fieldOrdinal];
+                                }
+                            }
+
+                            // Add This row
+                            dataTable.Rows.Add(dataRow);
+                        }
+                    }
+                    catch (Exception error)
+                    {
+                        // for debugging only
+                        string tableName = dataTable.Name;
+                        sqlUsed = false;
+                        string temp = sql;
+                        
+                        // Set the error
+                        DebugHelper.WriteDebugError("LoadDataRowsWithoutBinaryData", "SQLDatabaseConnector", error);
                     }
                     
                     // return value

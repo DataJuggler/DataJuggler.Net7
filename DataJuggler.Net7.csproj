@@ -19,13 +19,14 @@ SQLDatabaseConnector - A wrapper for SqlDatabaseConnection that reads database s
 CSharpClassWriter - A class that is useful in code generating C# classes.</Description>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/DataJuggler/DataJuggler.Net6</PackageProjectUrl>
-    <Version>7.0.9</Version>
+    <Version>7.0.10</Version>
     <Copyright>Data Juggler - Corby Nichols</Copyright>
     <RepositoryType>Git Hub</RepositoryType>
     <RepositoryUrl>https://github.com/DataJuggler/DataJuggler.Net6.git</RepositoryUrl>
     <PackageTags>C#, SQL Server, DataTier.Net, DataJuggler.Net</PackageTags>
     <PackageReleaseNotes>4.11.2023: I added a new delegate ProgressStatusCallback that can be passed into the LoadDataTablesData method
-to receive callbacks during long operations.
+to receive callbacks during long operations. I also put a try catch around LoadDataRowsWithoutBinaryData method
+so that if one table or view has a problem the others are not affected.
 
 4.1.2023: Everyone who likes this project on Git Hub will receive 3 good luck wishes.
 Results may vary.
@@ -111,8 +112,8 @@ Version 2.5.0: This version converted the .Net Core version to .Net 5. All the d
 
   <ItemGroup>    
     <PackageReference Include="DataJuggler.Cryptography" Version="7.0.0" />    
-    <PackageReference Include="DataJuggler.UltimateHelper" Version="7.1.1" />    
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.0" />
+    <PackageReference Include="DataJuggler.UltimateHelper" Version="7.1.2" />    
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
   </ItemGroup>
 
   <ItemGroup>   
