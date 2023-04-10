@@ -31,5 +31,6 @@ namespace DataJuggler.Net7.Delegates
     /// <param name="subStatus"></param>
     public delegate void ProgressStatusCallback(int totalMax, int totalCurrentValue, string totalStatus, int subMax, int subCurrentValue, string subStatus);
     #endregion
+
 }
 
