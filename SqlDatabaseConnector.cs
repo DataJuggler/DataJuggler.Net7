@@ -11,6 +11,7 @@ using System.Data;
 using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using DataJuggler.Net7.Delegates;
 
 #endregion
 
@@ -2303,11 +2304,26 @@ namespace DataJuggler.Net7
 
             #endregion
 
-            #region LoadDataTablesData(List<DataTable> tables, List<string> ignoreTables = null)
-            public List<DataTable> LoadDataTablesData(List<DataTable> tables, List<string> ignoreTables = null)
+            #region LoadDataTablesData(List<DataTable> tables, List<string> ignoreTables = null, ProgressStatusCallback callback = null)
+            /// <summary>
+            /// This methods loads the data rows for the list of tables, unless the table is in the ignoreTables list.
+            /// </summary>
+            /// <param name="tables">The list of DataTables to load data rows for.</param>
+            /// <param name="ignoreTables">A list of table names to exclude from loading.</param>
+            /// <param name="callback">A delegate to callback and report the current status.</param>
+            /// <returns></returns>
+            public List<DataTable> LoadDataTablesData(List<DataTable> tables, List<string> ignoreTables = null, ProgressStatusCallback callback = null)
 			{
-                // local
+                // locals
                 bool skipTable = false;
+                int progress = 0;
+
+                // If the tables collection exists and has one or more items
+                if ((ListHelper.HasOneOrMoreItems(tables)) && (NullHelper.Exists(callback)))
+                {
+                     // Setup the graph again
+                     callback(tables.Count * 2, 0, "Loading data rows", tables.Count, 0, "Begin iterating table collection");
+                }
 
 				// Iterate Through tables Collection
 				for(int x = 0;x < tables.Count;x++)
@@ -2336,9 +2352,31 @@ namespace DataJuggler.Net7
                     // if the value for skipTable is false
                     if (!skipTable)
                     {
+                        // If the callback object exists
+                        if (NullHelper.Exists(callback))
+                        {
+                            // notify the caller the current status
+                            callback(tables.Count * 2, progress, "Loading data rows for table " + tables[x].Name, tables.Count, progress, "Preparing to load");
+                        }
+
 					    // Load Rows For This table
 					    tables[x].Rows = LoadDataRows(tables[x]);
+
+                        // If the callback object exists
+                        if (NullHelper.Exists(callback))
+                        {
+                            // notify the caller the current status
+                            callback(tables.Count * 2, progress + 1, "Loading data rows complete for table " + tables[x].Name, tables.Count, progress + 1, "Load complete");
+                        }
                     }
+                    else
+                    {
+                        // notify the caller the current status
+                        callback(tables.Count * 2, progress, "Skipping table " + tables[x].Name, tables.Count, progress, "Table was in the ignore list");
+                    }
+
+                    // Increment the value for progress
+                    progress++;
 				}
 						
 				// Return tables

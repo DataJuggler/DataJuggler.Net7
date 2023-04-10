@@ -19,4 +19,17 @@ namespace DataJuggler.Net7.Delegates
     public delegate void ItemChangedCallback(object itemChanged, ChangeTypeEnum changeType);
     #endregion
 
+    #region ProgressStatusCallback(int totalMax, int totalCurrentValue, string totalStatus, int subMax, int subCurrentValue, string subStatus);
+    /// <summary>
+    /// This delegate is used so that SQLSnapshot can report on the current status for an export
+    /// </summary>
+    /// <param name="totalMax"></param>
+    /// <param name="totalCurrentValue"></param>
+    /// <param name="totalStatus"></param>
+    /// <param name="subMax"></param>
+    /// <param name="subCurrentValue"></param>
+    /// <param name="subStatus"></param>
+    public delegate void ProgressStatusCallback(int totalMax, int totalCurrentValue, string totalStatus, int subMax, int subCurrentValue, string subStatus);
+    #endregion
 }
+
