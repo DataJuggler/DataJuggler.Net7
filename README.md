@@ -1,4 +1,4 @@
-4.7.2023: I added a new delegate ProgressStatusCallback that can be passed into the LoadDataTablesData method
+4.11.2023: I added a new delegate ProgressStatusCallback that can be passed into the LoadDataTablesData method
 to receive callbacks during long operations.
 
 4.1.2023: DataJuggler.Net7 is a port of earlier versions of this project. All new development

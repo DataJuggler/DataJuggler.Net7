@@ -24,7 +24,10 @@ CSharpClassWriter - A class that is useful in code generating C# classes.</Descr
     <RepositoryType>Git Hub</RepositoryType>
     <RepositoryUrl>https://github.com/DataJuggler/DataJuggler.Net6.git</RepositoryUrl>
     <PackageTags>C#, SQL Server, DataTier.Net, DataJuggler.Net</PackageTags>
-    <PackageReleaseNotes>4.1.2023: Everyone who likes this project on Git Hub will receive 3 good luck wishes.
+    <PackageReleaseNotes>4.11.2023: I added a new delegate ProgressStatusCallback that can be passed into the LoadDataTablesData method
+to receive callbacks during long operations.
+
+4.1.2023: Everyone who likes this project on Git Hub will receive 3 good luck wishes.
 Results may vary.
 
 11.15.2022: I added TargetFrameworkEnum to this library. This enum is used by DataTier.Net
