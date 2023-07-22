@@ -1,3 +1,10 @@
+# News
+
+7.22.2023: CSharpClassWriter was updated for DataJuggler.Excelerate. All other functionality should be the same.
+
+7.16.2023: DataJuggler.Cryptography was updated to 7.1.0, as the constructor for Rfc2898DeriveBytes was 
+deemed obsolete. Also DataJuggler.UltimateHelper was updated to verison 7.1.3.
+
 4.11.2023: I added a new delegate ProgressStatusCallback that can be passed into the LoadDataTablesData method
 to receive callbacks during long operations.
 

@@ -3161,6 +3161,12 @@ namespace DataJuggler.Net7
                                 // Write out a property with a callback
 						        WritePropertyWithCallback(field);
                             }
+                            else if (field.AddColumnToChangesIfNotLoading)
+                            {
+                                // this is used by Excelerate, might include in DataTier.Net
+                                // Write this property
+                                WritePropertyToChangesIfNotLoading(field);
+                            }
                             else
                             {
                                 // Write this property
@@ -3499,6 +3505,96 @@ namespace DataJuggler.Net7
 			}
 			#endregion
 
+            #region WritePropertyToChangesIfNotLoading(DataField field)
+            /// <summary>
+            /// Write Property With Has Changes If Not Loading
+            /// </summary>
+            public void WritePropertyToChangesIfNotLoading(DataField field)
+            {
+                // locals
+                string PropertyLine = null;
+                string RegionLine = null;
+
+                // Write A NewLine
+                WriteLine();
+
+                // increment Indent
+                Indent++;
+
+                // Start A New Region For This PropertyLine
+                RegionLine = GetRegionLine(field);
+                BeginRegion(RegionLine);
+
+                // Get PropertyLineText
+                PropertyLine = GetPropertyLine(field);
+
+                // Write The PropertyLine
+                WriteLine(PropertyLine);
+
+                // Write An OpenBracket
+                WriteOpenBracket(true);
+
+                // If ReadOnly or ReadWrite 
+                if (WriteGet(field))
+                {
+                    // Write The Word Get
+                    WriteLine("get");
+
+                    // Write An OpenBracket
+                    WriteOpenBracket(true);
+
+                    // Write Get Code Now
+                    string GetText = CreateGetText(field);
+                    WriteLine(GetText);
+
+                    // Write A CloseBracket
+                    WriteCloseBracket(true);
+                }
+
+                // If ReadWrite or WriteOnly
+                if (WriteSet(field))
+                {
+                    // Write The Word set
+                    WriteLine("set");
+
+                    // Write An OpenBracket
+                    WriteOpenBracket(true);
+
+                    // Write Get Code Now
+                    string SetText = CreateSetText(field);
+                    WriteLine(SetText);
+
+                    // Write a blank line
+                    WriteLine();
+
+                    // write a line
+                    WriteLine("if (!Loading)");
+
+                     // Write An OpenBracket
+                    WriteOpenBracket(true);
+
+                    // Add this field to changed columns
+                    string line = "ChangedColumns += " + field.Index  + " + " + '"' +  "," + '"' + ";";
+                    WriteLine(line);
+
+                    // Write a close bracket
+                    WriteCloseBracket(true);
+
+                    // Write A CloseBracket
+                    WriteCloseBracket(true);
+                }
+
+                // Write A CloseBracket
+                WriteCloseBracket(true);
+
+                // EndRegion
+                EndRegion();
+
+                // decrement Indent
+                Indent--;
+            }
+            #endregion
+            
 			#region WriteReference(Reference Ref) void
 			public void WriteReference(Reference Ref)
 			{

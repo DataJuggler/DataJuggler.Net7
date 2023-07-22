@@ -50,7 +50,8 @@ namespace DataJuggler.Net7
         private bool isEnumeration;
         private string enumDataTypeName;
 		private string tag;
-        
+        private bool addColumnToChangesIfNotLoading;
+
         // used only for DataTier.Net
         private string fieldSetName;
         private int fieldId;
@@ -358,6 +359,17 @@ namespace DataJuggler.Net7
 			}
 			#endregion
 
+            #region AddColumnToChangesIfNotLoading
+            /// <summary>
+            /// This property gets or sets the value for 'AddColumnToChangesIfNotLoading'.
+            /// </summary>
+            public bool AddColumnToChangesIfNotLoading
+            {
+                get { return addColumnToChangesIfNotLoading; }
+                set { addColumnToChangesIfNotLoading = value; }
+            }
+            #endregion
+            
             #region Caption
 			public string Caption
 			{

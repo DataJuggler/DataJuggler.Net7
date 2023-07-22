@@ -1,5 +1,7 @@
 # News
 
+7.22.2023: CSharpClassWriter was updated for DataJuggler.Excelerate. All other functionality should be the same.
+
 7.16.2023: DataJuggler.Cryptography was updated to 7.1.0, as the constructor for Rfc2898DeriveBytes was 
 deemed obsolete. Also DataJuggler.UltimateHelper was updated to verison 7.1.3.
 
